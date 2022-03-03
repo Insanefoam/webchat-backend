@@ -15,6 +15,7 @@ export class ObjectionConfigService {
         user: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
       },
+      debug: true,
     });
 
     Model.knex(knex);

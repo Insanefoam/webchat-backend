@@ -1,17 +1,26 @@
+import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { IAM } from 'src/common/decorators/iam.decorator';
 import { UserEntity } from '../entities/user.entity';
 import { UserModel } from '../models/user.model';
+import { UsersService } from '../services/users.service';
 
 @Resolver()
 export class UsersQueryResolver {
-  @Query(() => UserModel, { name: 'users_getMe' })
-  async getMe(): Promise<UserModel> {
-    const data = await UserEntity.query();
+  constructor(private readonly service: UsersService) {}
 
-    return {
-      id: '12345',
-      nickname: 'Insanefoam',
-      avatar: 'https://docs.nestjs.com/graphql/resolvers',
-    };
+  @UseGuards(JwtAuthGuard)
+  @Query(() => UserModel, { name: 'users_getMe' })
+  async getMe(@IAM() iam: UserEntity): Promise<UserModel> {
+    return UserModel.createFromEntity(iam);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => [UserModel], { name: 'users_getMany' })
+  async getMany(): Promise<UserModel[]> {
+    const users = await this.service.getMany();
+
+    return UserModel.createFromEntity(users);
   }
 }

@@ -2,12 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Mutation {
+  auth_signIn(input: SignInInput!): SignInPayload!
+  auth_signUp(input: SignUpInput!): SignUpPayload!
+}
+
 type Query {
+  users_getMany: [User!]!
   users_getMe: User!
 }
 
+input SignInInput {
+  password: String!
+  username: String!
+}
+
+type SignInPayload {
+  problem: String
+  token: String
+  user: User
+}
+
+input SignUpInput {
+  password: String!
+  username: String!
+}
+
+type SignUpPayload {
+  problem: String
+  token: String
+  user: User
+}
+
 type User {
-  avatar: String!
+  avatarUrl: String
   id: String!
-  nickname: String!
+  nickname: String
+  username: String
 }
