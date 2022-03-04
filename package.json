@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -38,6 +38,7 @@
     "@nestjs/websockets": "^8.2.4",
     "apollo-server-fastify": "^3.6.3",
     "bcrypt": "^5.0.1",
+    "dataloader": "^2.0.0",
     "dotenv": "^16.0.0",
     "fastify": "^3.17.0",
     "graphql": "^16.3.0",
@@ -83,7 +84,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -91,7 +92,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/insanefoam-dataloader(|/.*)$": "<rootDir>/libs/insanefoam-dataloader/src/$1"
+    }
   }
 }

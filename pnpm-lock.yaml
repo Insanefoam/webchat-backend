@@ -26,6 +26,7 @@ specifiers:
   '@typescript-eslint/parser': ^4.28.2
   apollo-server-fastify: ^3.6.3
   bcrypt: ^5.0.1
+  dataloader: ^2.0.0
   dotenv: ^16.0.0
   eslint: ^7.30.0
   eslint-config-prettier: ^8.3.0
@@ -65,6 +66,7 @@ dependencies:
   '@nestjs/websockets': 8.2.4_04d7ce634e7bc6b9fd797d4992d4fc10
   apollo-server-fastify: 3.6.3_fastify@3.27.2+graphql@16.3.0
   bcrypt: 5.0.1
+  dataloader: 2.0.0
   dotenv: 16.0.0
   fastify: 3.27.2
   graphql: 16.3.0
@@ -2685,6 +2687,10 @@ packages:
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
     dev: true
+
+  /dataloader/2.0.0:
+    resolution: {integrity: sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==}
+    dev: false
 
   /db-errors/0.2.3:
     resolution: {integrity: sha512-OOgqgDuCavHXjYSJoV2yGhv6SeG8nk42aoCSoyXLZUH7VwFG27rxbavU1z+VrZbZjphw5UkDQwUlD21MwZpUng==}

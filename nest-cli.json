@@ -1,4 +1,18 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "src",
+  "projects": {
+    "insanefoam-dataloader": {
+      "type": "library",
+      "root": "libs/insanefoam-dataloader",
+      "entryFile": "index",
+      "sourceRoot": "libs/insanefoam-dataloader/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/insanefoam-dataloader/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
 }
