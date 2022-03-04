@@ -13,6 +13,7 @@ import { FriendshipsModule } from './friendships/friendships.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { DataLoaderInterceptor } from 'libs/insanefoam-dataloader/src/dataloader.interceptor';
 import { dataloaderProviders } from './common/dataloaders';
+import { ChatRoomsModule } from './chat-rooms/chat-rooms.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { dataloaderProviders } from './common/dataloaders';
     UsersModule,
     AuthModule,
     FriendshipsModule,
+    ChatRoomsModule,
   ],
   controllers: [AppController],
   providers: [
