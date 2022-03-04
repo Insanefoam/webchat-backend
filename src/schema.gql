@@ -2,12 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateFriendshipInput {
+  userId: String!
+}
+
+type CreateFriendshipPayload {
+  friendship: Friendship
+  problem: String
+}
+
+type Friendship {
+  firstUser: User!
+  firstUserId: String!
+  id: String!
+  secondUser: User!
+  secondUserId: String!
+  status: FriendshipStatusEnum!
+}
+
+enum FriendshipStatusEnum {
+  ACCEPTED
+  DECLINED
+  PENDING
+}
+
 type Mutation {
   auth_signIn(input: SignInInput!): SignInPayload!
   auth_signUp(input: SignUpInput!): SignUpPayload!
+  friendships_createOne(input: CreateFriendshipInput!): CreateFriendshipPayload!
+  friendships_updateOneStatus(input: UpdateFriendshipStatusInput!): Friendship!
 }
 
 type Query {
+  friendships_getMany: [Friendship!]!
   users_getMany: [User!]!
   users_getMe: User!
 }
@@ -32,6 +59,11 @@ type SignUpPayload {
   problem: String
   token: String
   user: User
+}
+
+input UpdateFriendshipStatusInput {
+  friendshipId: String!
+  status: FriendshipStatusEnum!
 }
 
 type User {

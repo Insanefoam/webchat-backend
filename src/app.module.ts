@@ -9,6 +9,7 @@ import { GraphqlConfigService } from './common/services/graphql-config.service';
 import { ObjectionConfigService } from './common/services/objection-config.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { FriendshipsModule } from './friendships/friendships.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({ load: [loadConfiguration], isGlobal: true }),
     UsersModule,
     AuthModule,
+    FriendshipsModule,
   ],
   controllers: [AppController],
   providers: [AppService, ObjectionConfigService],
