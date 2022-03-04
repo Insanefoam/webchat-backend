@@ -10,6 +10,9 @@ import { ObjectionConfigService } from './common/services/objection-config.servi
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { FriendshipsModule } from './friendships/friendships.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { DataLoaderInterceptor } from 'libs/insanefoam-dataloader/src/dataloader.interceptor';
+import { dataloaderProviders } from './common/dataloaders';
 
 @Module({
   imports: [
@@ -23,6 +26,11 @@ import { FriendshipsModule } from './friendships/friendships.module';
     FriendshipsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ObjectionConfigService],
+  providers: [
+    AppService,
+    ObjectionConfigService,
+    { provide: APP_INTERCEPTOR, useClass: DataLoaderInterceptor },
+    ...dataloaderProviders,
+  ],
 })
 export class AppModule {}

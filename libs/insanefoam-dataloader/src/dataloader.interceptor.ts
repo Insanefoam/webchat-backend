@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   NestInterceptor,
 } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { ContextIdFactory, ModuleRef } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
@@ -15,7 +16,10 @@ import { NEST_LOADER_CONTEXT_KEY } from './dataloader.types';
 export class DataLoaderInterceptor implements NestInterceptor {
   constructor(private readonly moduleRef: ModuleRef) {}
 
-  intercept(context: ExecutionContext, next: CallHandler) {
+  intercept(
+    context: ExecutionContext,
+    next: CallHandler,
+  ): Observable<any> | Promise<Observable<any>> {
     const graphqlExecutionContext = GqlExecutionContext.create(context);
     const ctx = graphqlExecutionContext.getContext() as ExecutionContext;
 
@@ -37,6 +41,7 @@ export class DataLoaderInterceptor implements NestInterceptor {
             const loader = this.moduleRef.get(type);
 
             const dataLoader = loader.generateDataLoader();
+
             ctx[type] = dataLoader;
           } catch (e) {
             throw new InternalServerErrorException(
