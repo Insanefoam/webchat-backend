@@ -14,6 +14,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { DataLoaderInterceptor } from 'libs/insanefoam-dataloader/src/dataloader.interceptor';
 import { dataloaderProviders } from './common/dataloaders';
 import { ChatRoomsModule } from './chat-rooms/chat-rooms.module';
+import { ScyllaModule } from './scylla/scylla.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ChatRoomsModule } from './chat-rooms/chat-rooms.module';
     AuthModule,
     FriendshipsModule,
     ChatRoomsModule,
+    ScyllaModule,
   ],
   controllers: [AppController],
   providers: [
