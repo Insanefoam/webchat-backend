@@ -5,8 +5,7 @@ import { ChatParticipantModel } from './chat-participant.model';
 @ObjectType('ChatRoom')
 export class ChatRoomModel {
   constructor(entity: ChatRoomEntity) {
-    this.id = entity.id;
-    this.participants = entity.participants;
+    Object.assign(this, entity);
   }
 
   @Field()

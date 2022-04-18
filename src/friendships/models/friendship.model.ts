@@ -6,12 +6,7 @@ import { FriendshipEntity } from '../entities/friendship.entity';
 @ObjectType('Friendship')
 export class FriendshipModel {
   constructor(entity: FriendshipEntity) {
-    this.id = entity.id;
-    this.firstUser = entity.firstUser;
-    this.firstUserId = entity.firstUserId;
-    this.secondUser = entity.secondUser;
-    this.secondUserId = entity.secondUserId;
-    this.status = entity.status;
+    Object.assign(this, entity);
   }
 
   @Field()

@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ChatMessage {
+  chatRoom: ChatRoom!
+  chatRoomId: String!
+  content: String!
+  createdAt: String!
+  id: String!
+  sender: User!
+  senderId: String!
+}
+
 type ChatParticipant {
   chatRoom: ChatRoom!
   chatRoomId: String!
@@ -13,6 +23,11 @@ type ChatParticipant {
 type ChatRoom {
   id: String!
   participants: [ChatParticipant!]!
+}
+
+input CreateChatMessageInput {
+  chatRoomId: String!
+  content: String!
 }
 
 input CreateChatRoomInput {
@@ -43,17 +58,24 @@ enum FriendshipStatusEnum {
   PENDING
 }
 
+input GetForChatFilterInput {
+  chatRoomId: String!
+  date: String!
+}
+
 type Mutation {
   auth_signIn(input: SignInInput!): SignInPayload!
   auth_signUp(input: SignUpInput!): SignUpPayload!
   chatRooms_createOne(input: CreateChatRoomInput!): ChatRoom!
   friendships_createOne(input: CreateFriendshipInput!): CreateFriendshipPayload!
   friendships_updateOneStatus(input: UpdateFriendshipStatusInput!): Friendship!
+  messages_createChatMessage(input: CreateChatMessageInput!): ChatMessage!
 }
 
 type Query {
   chatRooms_getMany: [ChatRoom!]!
   friendships_getMany: [Friendship!]!
+  messages_getForChat(filter: GetForChatFilterInput!): [ChatMessage!]!
   users_getMany: [User!]!
   users_getMe: User!
 }

@@ -10,3 +10,30 @@ services:
       - POSTGRES_USER=insanefoam
       - POSTGRES_PASSWORD=qwerty
       - POSTGRES_DB=webchat
+
+  scylla-node-root:
+    image: scylladb/scylla:latest
+    networks:
+      - scylla
+    ports:
+      - '9042:9042'
+
+  scylla-node-2:
+    image: scylladb/scylla:latest
+    command: --seeds=scylla-node-root
+    networks:
+      - scylla
+    depends_on:
+      - scylla-node-root
+
+  scylla-node-3:
+    image: scylladb/scylla:latest
+    command: --seeds=scylla-node-root
+    networks:
+      - scylla
+    depends_on:
+      - scylla-node-root
+
+networks:
+  scylla:
+    driver: bridge

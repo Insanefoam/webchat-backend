@@ -4,10 +4,7 @@ import { UserEntity } from '../entities/user.entity';
 @ObjectType('User')
 export class UserModel {
   constructor(entity: UserEntity) {
-    this.id = entity.id;
-    this.username = entity.username;
-    this.nickname = entity.nickname;
-    this.avatarUrl = entity.avatarUrl;
+    Object.assign(this, entity);
   }
 
   @Field()
