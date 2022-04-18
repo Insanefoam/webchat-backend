@@ -1,0 +1,14 @@
+{
+  "migrationsDir": "scylla/migrations",
+  "quiet": false,
+  "cassandra": {
+    "contactPoints": ["127.0.0.1:9042"],
+    "datacenterName": "datacenter1",
+    "localDataCenter": "datacenter1",
+    "keyspace": "webchat",
+    "useSingleNode": false,
+    "protocolOptions": {
+      "port": 9042
+    }
+  }
+}

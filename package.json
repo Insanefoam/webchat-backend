@@ -21,7 +21,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:generate": "knex migrate:make $1 -x ts",
     "migration:run": "knex migrate:latest",
-    "migration:rollback": "knex migrate:rollback"
+    "migration:rollback": "knex migrate:rollback",
+    "scylla:migration:generate": "sh scylla/scripts/generate-scylla-migration.sh $1",
+    "scylla:migration:up": "cassandra-migration scylla-migration.config.json"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.6",
@@ -35,8 +37,11 @@
     "@nestjs/platform-fastify": "^8.4.0",
     "@nestjs/platform-socket.io": "^8.2.4",
     "@nestjs/websockets": "^8.2.4",
+    "@vscode/sqlite3": "^5.0.8",
     "apollo-server-fastify": "^3.6.3",
     "bcrypt": "^5.0.1",
+    "cassandra-driver": "^4.6.3",
+    "cassandra-migration": "^3.0.0",
     "dataloader": "^2.0.0",
     "dotenv": "^16.0.0",
     "fastify": "^3.17.0",
