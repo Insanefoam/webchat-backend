@@ -23,7 +23,8 @@
     "migration:run": "knex migrate:latest",
     "migration:rollback": "knex migrate:rollback",
     "scylla:migration:generate": "sh scylla/scripts/generate-scylla-migration.sh $1",
-    "scylla:migration:up": "cassandra-migration scylla-migration.config.json"
+    "scylla:migration:up": "cassandra-migration scylla-migration.config.json",
+    "generate:module": "npx hygen module with-prompt"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.6",
