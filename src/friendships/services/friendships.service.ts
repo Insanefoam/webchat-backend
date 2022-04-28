@@ -57,4 +57,37 @@ export class FriendshipsService {
       status: dto.status,
     });
   }
+
+  async getCommonFriends(
+    firstUserId: UserEntity['id'],
+    secondUserId: UserEntity['id'],
+  ): Promise<UserEntity[]> {
+    const firstUserFriendships = await FriendshipEntity.query()
+      .where({
+        userId: firstUserId,
+      })
+      .orWhere({ friendId: firstUserId });
+
+    const secondUserFriendships = await FriendshipEntity.query()
+      .where({
+        userId: secondUserId,
+      })
+      .orWhere({ friendId: secondUserId });
+
+    const commonFriendships = firstUserFriendships.filter((friendship) => {
+      const isCommon = secondUserFriendships.find(
+        (fr) =>
+          fr.friendId === friendship.friendId ||
+          fr.userId === friendship.userId,
+      );
+
+      return Boolean(isCommon);
+    });
+
+    const commonFriendsIds = commonFriendships
+      .map((fr) => fr.friendId)
+      .filter((id) => ![firstUserId, secondUserId].includes(id));
+
+    return UserEntity.query().findByIds(commonFriendsIds);
+  }
 }

@@ -1,24 +1,23 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { UserEntity } from 'src/users/entities/user.entity';
-import { UserModel } from 'src/users/models/user.model';
 import { FriendshipStatus } from '../common/friendships.types';
 import { FriendshipEntity } from '../entities/friendship.entity';
+import { FriendModel } from './friend.model';
 
 @ObjectType('Friendship')
 export class FriendshipModel {
   constructor(entity: FriendshipEntity) {
     Object.assign(this, entity);
-    this.userId = entity.friendId;
+    this.friendId = entity.friendId;
   }
 
   @Field()
   id: string;
 
-  @Field(() => UserModel)
-  user: UserModel;
+  @Field(() => FriendModel)
+  friend: FriendModel;
 
   @Field()
-  userId: string;
+  friendId: string;
 
   @Field(() => FriendshipStatus)
   status: FriendshipStatus;
