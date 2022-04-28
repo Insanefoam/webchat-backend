@@ -43,12 +43,18 @@ type CreateFriendshipPayload {
   problem: String
 }
 
-type Friendship {
-  firstUser: User!
-  firstUserId: String!
+type Friend {
+  avatarUrl: String
+  commonFriends: [User!]!
   id: String!
-  secondUser: User!
-  secondUserId: String!
+  nickname: String
+  username: String
+}
+
+type Friendship {
+  friend: Friend!
+  friendId: String!
+  id: String!
   status: FriendshipStatusEnum!
 }
 
@@ -69,15 +75,16 @@ type Mutation {
   chatRooms_createOne(input: CreateChatRoomInput!): ChatRoom!
   friendships_createOne(input: CreateFriendshipInput!): CreateFriendshipPayload!
   friendships_updateOneStatus(input: UpdateFriendshipStatusInput!): Friendship!
+  me_updateProfile(input: UpdateProfileInput!): User!
   messages_createChatMessage(input: CreateChatMessageInput!): ChatMessage!
 }
 
 type Query {
   chatRooms_getMany: [ChatRoom!]!
   friendships_getMany: [Friendship!]!
+  me_getMe: User!
   messages_getForChat(filter: GetForChatFilterInput!): [ChatMessage!]!
   users_getMany: [User!]!
-  users_getMe: User!
 }
 
 input SignInInput {
@@ -105,6 +112,11 @@ type SignUpPayload {
 input UpdateFriendshipStatusInput {
   friendshipId: String!
   status: FriendshipStatusEnum!
+}
+
+input UpdateProfileInput {
+  avatarUrl: String
+  nickname: String
 }
 
 type User {

@@ -8,4 +8,11 @@ export class UsersService {
 
     return data;
   }
+
+  async updateOne(
+    id: UserEntity['id'],
+    partial: Partial<UserEntity>,
+  ): Promise<UserEntity> {
+    return UserEntity.query().updateAndFetchById(id, partial);
+  }
 }

@@ -11,7 +11,7 @@ export class UsersQueryResolver {
   constructor(private readonly service: UsersService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Query(() => UserModel, { name: 'users_getMe' })
+  @Query(() => UserModel, { name: 'me_getMe' })
   async getMe(@IAM() iam: UserEntity): Promise<UserModel> {
     return UserModel.createFromEntity(iam);
   }
