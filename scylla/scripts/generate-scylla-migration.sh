@@ -1,2 +1,7 @@
 #!/bin/bash
-touch scylla/migrations/$(date +%s)__$1.cql
+
+echo Enter migration name
+
+read name
+
+touch scylla/migrations/$(date +%s)__$name.cql

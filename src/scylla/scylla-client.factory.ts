@@ -5,6 +5,7 @@ import { Client } from 'cassandra-driver';
 export const ScyllaClientFactory: FactoryProvider = {
   provide: 'SCYLLA_CLIENT',
   useFactory: (configService: ConfigService): Client => {
+    //TODO: Change to config service
     const client = new Client({
       contactPoints: ['localhost:9042'],
       localDataCenter: 'datacenter1',
