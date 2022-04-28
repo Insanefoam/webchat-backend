@@ -36,12 +36,16 @@ export class AuthService {
       username: dto.username,
     });
 
+    if (!user) {
+      throw new ForbiddenException(`Incorrect email or password`);
+    }
+
     const isPasswordCorrect = await this.comparePasswords(
       dto.password,
       user.password,
     );
 
-    if (!user || !isPasswordCorrect) {
+    if (!isPasswordCorrect) {
       throw new ForbiddenException(`Incorrect email or password`);
     }
 
