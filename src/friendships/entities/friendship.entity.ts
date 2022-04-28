@@ -8,19 +8,19 @@ export class FriendshipEntity extends BaseEntity {
 
   id: string;
 
-  firstUser: UserEntity;
+  user: UserEntity;
 
-  firstUserId: string;
+  userId: string;
 
-  secondUser: UserEntity;
+  friend: UserEntity;
 
-  secondUserId: string;
+  friendId: string;
 
   status: FriendshipStatus;
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
-      firstUser: {
+      user: {
         relation: Model.HasManyRelation,
         modelClass: UserEntity,
         join: {
@@ -28,7 +28,7 @@ export class FriendshipEntity extends BaseEntity {
           to: `${UserEntity.tableName}.id`,
         },
       },
-      secondUser: {
+      friend: {
         relation: Model.HasManyRelation,
         modelClass: UserEntity,
         join: {

@@ -1,6 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Problem } from 'src/common/classes/problem.class';
 import { IAM } from 'src/common/decorators/iam.decorator';
 import { UserEntity } from 'src/users/entities/user.entity';
 import {
@@ -22,7 +23,17 @@ export class FriendshipsMutationResolver {
     @Args('input') input: CreateFriendshipInput,
     @IAM() iam: UserEntity,
   ): Promise<CreateFriendshipPayload> {
-    return this.service.createOne(iam, input);
+    try {
+      const entity = await this.service.createOne(iam, input);
+
+      return {
+        friendship: FriendshipModel.createFromEntity(entity),
+      };
+    } catch (e) {
+      if (e instanceof Problem) {
+        return { problem: e.problem };
+      }
+    }
   }
 
   @UseGuards(IsUserFriendshipOwnerGuard)

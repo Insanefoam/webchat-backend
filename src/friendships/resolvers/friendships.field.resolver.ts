@@ -8,24 +8,13 @@ import { FriendshipModel } from '../models/friendship.model';
 
 @Resolver(() => FriendshipModel)
 export class FriendshipsFieldResolver {
-  @ResolveField(() => UserModel, { name: 'firstUser' })
-  async resolveFirstUser(
+  @ResolveField(() => UserModel, { name: 'user' })
+  async resolveUser(
     @Parent() parent: FriendshipModel,
     @Loader(UserByIdDataloader)
     usersLoader: DataLoader<string, UserEntity>,
   ): Promise<UserModel> {
-    const entity = await usersLoader.load(parent.firstUserId);
-
-    return UserModel.createFromEntity(entity);
-  }
-
-  @ResolveField(() => UserModel, { name: 'secondUser' })
-  async resolveSecondUser(
-    @Parent() parent: FriendshipModel,
-    @Loader(UserByIdDataloader)
-    usersLoader: DataLoader<string, UserEntity>,
-  ): Promise<UserModel> {
-    const entity = await usersLoader.load(parent.secondUserId);
+    const entity = await usersLoader.load(parent.userId);
 
     return UserModel.createFromEntity(entity);
   }

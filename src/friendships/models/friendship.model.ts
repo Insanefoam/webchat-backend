@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { UserEntity } from 'src/users/entities/user.entity';
 import { UserModel } from 'src/users/models/user.model';
 import { FriendshipStatus } from '../common/friendships.types';
 import { FriendshipEntity } from '../entities/friendship.entity';
@@ -7,22 +8,17 @@ import { FriendshipEntity } from '../entities/friendship.entity';
 export class FriendshipModel {
   constructor(entity: FriendshipEntity) {
     Object.assign(this, entity);
+    this.userId = entity.friendId;
   }
 
   @Field()
   id: string;
 
   @Field(() => UserModel)
-  firstUser: UserModel;
+  user: UserModel;
 
   @Field()
-  firstUserId: string;
-
-  @Field(() => UserModel)
-  secondUser: UserModel;
-
-  @Field()
-  secondUserId: string;
+  userId: string;
 
   @Field(() => FriendshipStatus)
   status: FriendshipStatus;
