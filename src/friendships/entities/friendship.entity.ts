@@ -1,12 +1,10 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseUUIDEntity } from 'src/common/entities/base-uuid.entity';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { FriendshipStatus } from '../common/friendships.types';
 
-export class FriendshipEntity extends BaseEntity {
+export class FriendshipEntity extends BaseUUIDEntity {
   static tableName = 'friendships';
-
-  id: string;
 
   user: UserEntity;
 

@@ -1,10 +1,8 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseUUIDEntity } from 'src/common/entities/base-uuid.entity';
 import { UserEntity } from 'src/users/entities/user.entity';
 
-export class ReportEntity extends BaseEntity {
+export class ReportEntity extends BaseUUIDEntity {
   static tableName = 'reports';
-
-  id: string;
 
   senderId: UserEntity['id'];
 

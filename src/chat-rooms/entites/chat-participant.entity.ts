@@ -1,12 +1,10 @@
 import { Model, RelationMappings } from 'objection';
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseUUIDEntity } from 'src/common/entities/base-uuid.entity';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { ChatRoomEntity } from './chat-room.entity';
 
-export class ChatParticipantEntity extends BaseEntity {
+export class ChatParticipantEntity extends BaseUUIDEntity {
   static tableName = 'chat_participants';
-
-  id: string;
 
   chatRoom: ChatRoomEntity;
 

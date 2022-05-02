@@ -1,9 +1,7 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseUUIDEntity } from 'src/common/entities/base-uuid.entity';
 
-export class UserEntity extends BaseEntity {
+export class UserEntity extends BaseUUIDEntity {
   static tableName = 'users';
-
-  id: string;
 
   username: string;
 
