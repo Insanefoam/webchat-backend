@@ -2,9 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { ChatMessageEntity } from '../entites/chat-message.entity';
 import { CreateChatMessageInput } from '../inputs/chat-messages.inputs';
+import { IndexChatMessagesService } from './index-chat-messages.service';
 
 @Injectable()
 export class ChatMessagesService {
+  constructor(private readonly indexingService: IndexChatMessagesService) {}
+
   async getByChatId(
     chatRoomId: ChatMessageEntity['chatRoomId'],
     date: ChatMessageEntity['date'],
@@ -24,9 +27,9 @@ export class ChatMessagesService {
     const message = await ChatMessageEntity.createOne({
       ...input,
       senderId: userId,
-      createdAt: new Date().toISOString(),
-      date: `${new Date().getFullYear()}.${new Date().getMonth()}`,
     });
+
+    await this.indexingService.indexMessage(message);
 
     return message;
   }

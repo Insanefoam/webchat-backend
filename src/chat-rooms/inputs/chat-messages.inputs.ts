@@ -10,6 +10,12 @@ export class GetForChatFilterInput {
 }
 
 @InputType()
+export class FindMessagesHitsInput {
+  @Field()
+  content: string;
+}
+
+@InputType()
 export class CreateChatMessageInput {
   @Field()
   chatRoomId: string;

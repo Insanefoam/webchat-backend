@@ -53,13 +53,17 @@ export class ChatMessageEntity extends BaseScyllaEntity {
   static async createOne(
     partial: Partial<ChatMessageEntity>,
   ): Promise<ChatMessageEntity> {
-    await this.messageMapper.insert({ ...partial, id: randomUUID() });
+    const id = randomUUID();
 
-    const result = await this.messageMapper.find({
-      chatRoomId: partial.chatRoomId,
-      date: partial.date,
-    });
+    const messageData = {
+      ...partial,
+      createdAt: new Date().toISOString(),
+      date: `${new Date().getFullYear()}.${new Date().getMonth()}`,
+      id,
+    } as ChatMessageEntity;
 
-    return result.first();
+    await this.messageMapper.insert(messageData);
+
+    return messageData;
   }
 }

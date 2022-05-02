@@ -43,6 +43,10 @@ type CreateFriendshipPayload {
   problem: String
 }
 
+input FindMessagesHitsInput {
+  content: String!
+}
+
 type Friend {
   avatarUrl: String
   commonFriends: [User!]!
@@ -77,14 +81,30 @@ type Mutation {
   friendships_updateOneStatus(input: UpdateFriendshipStatusInput!): Friendship!
   me_updateProfile(input: UpdateProfileInput!): User!
   messages_createChatMessage(input: CreateChatMessageInput!): ChatMessage!
+  reports_sendReport(input: SendReportInput!): Report!
 }
 
 type Query {
   chatRooms_getMany: [ChatRoom!]!
   friendships_getMany: [Friendship!]!
   me_getMe: User!
+  messages_findMessagesHits(filter: FindMessagesHitsInput!): [ChatMessage!]!
   messages_getForChat(filter: GetForChatFilterInput!): [ChatMessage!]!
   users_getMany: [User!]!
+}
+
+type Report {
+  id: String!
+  reportContent: String!
+  reportedUser: User!
+  reportedUserId: String!
+  sender: User!
+  senderId: String!
+}
+
+input SendReportInput {
+  content: String!
+  userId: String!
 }
 
 input SignInInput {
