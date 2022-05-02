@@ -15,6 +15,8 @@ import { DataLoaderInterceptor } from 'libs/insanefoam-dataloader/src/dataloader
 import { dataloaderProviders } from './common/dataloaders';
 import { ChatRoomsModule } from './chat-rooms/chat-rooms.module';
 import { ScyllaModule } from './scylla/scylla.module';
+import { ReportsModule } from './reports/reports.module';
+import { ElasticModule } from './common/modules/elastic.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { ScyllaModule } from './scylla/scylla.module';
     FriendshipsModule,
     ChatRoomsModule,
     ScyllaModule,
+    ReportsModule,
+    ElasticModule,
   ],
   controllers: [AppController],
   providers: [

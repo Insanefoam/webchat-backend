@@ -18,22 +18,18 @@ services:
     ports:
       - '9042:9042'
 
-  scylla-node-2:
-    image: scylladb/scylla:latest
-    command: --seeds=scylla-node-root
+  elastic:
+    image: elasticsearch:8.1.3
     networks:
-      - scylla
-    depends_on:
-      - scylla-node-root
-
-  scylla-node-3:
-    image: scylladb/scylla:latest
-    command: --seeds=scylla-node-root
-    networks:
-      - scylla
-    depends_on:
-      - scylla-node-root
+      - elastic
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - discovery.type=single-node
 
 networks:
   scylla:
+    driver: bridge
+  elastic:
     driver: bridge

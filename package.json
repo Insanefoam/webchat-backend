@@ -27,10 +27,12 @@
     "generate:module": "npx hygen module with-prompt"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.1.0",
     "@nestjs/apollo": "^10.0.6",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/elasticsearch": "^8.1.0",
     "@nestjs/graphql": "^10.0.6",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.2.1",
@@ -73,6 +75,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
     "supertest": "^6.1.3",
