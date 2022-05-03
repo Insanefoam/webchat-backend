@@ -82,6 +82,10 @@ type Mutation {
   me_updateProfile(input: UpdateProfileInput!): User!
   messages_createChatMessage(input: CreateChatMessageInput!): ChatMessage!
   reports_sendReport(input: SendReportInput!): Report!
+  roulette_endSession(sessionId: String!): RouletteSession!
+  roulette_requestMatch(sessionId: String!): RouletteSessionMatch!
+  roulette_startSession: RouletteSession!
+  roulette_stopMatch(matchId: String!): RouletteSessionMatch!
 }
 
 type Query {
@@ -90,6 +94,8 @@ type Query {
   me_getMe: User!
   messages_findMessagesHits(filter: FindMessagesHitsInput!): [ChatMessage!]!
   messages_getForChat(filter: GetForChatFilterInput!): [ChatMessage!]!
+  roulette_getActiveMatch: RouletteSessionMatch
+  roulette_getActiveSession: RouletteSession!
   users_getMany: [User!]!
 }
 
@@ -100,6 +106,20 @@ type Report {
   reportedUserId: String!
   sender: User!
   senderId: String!
+}
+
+type RouletteSession {
+  id: String!
+}
+
+type RouletteSessionMatch {
+  companion: User!
+  companionId: String!
+  endedAt: String
+  id: String!
+  session: RouletteSession!
+  sessionId: String!
+  startedAt: String!
 }
 
 input SendReportInput {

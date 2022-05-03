@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ElasticModule } from 'src/common/modules/elastic.module';
+import { ElasticModule } from 'src/common/modules/elastic/elastic.module';
 import { ChatMessagesMutationResolver } from './resolvers/chat-messages.mutation.resolver';
 import { ChatMessagesQueryResolver } from './resolvers/chat-messages.query.resolver';
 import { ChatParticipantsFieldResolver } from './resolvers/chat-participants.field.resolver';
