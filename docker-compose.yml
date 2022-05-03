@@ -28,6 +28,11 @@ services:
     environment:
       - discovery.type=single-node
 
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+
 networks:
   scylla:
     driver: bridge

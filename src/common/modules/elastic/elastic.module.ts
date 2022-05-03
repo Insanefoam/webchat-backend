@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
-import { ElasticConfigService } from '../services/elastic-config.service';
+import { ElasticConfigService } from '../../services/elastic-config.service';
 
 @Module({
   imports: [

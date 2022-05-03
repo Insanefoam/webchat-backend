@@ -16,7 +16,9 @@ import { dataloaderProviders } from './common/dataloaders';
 import { ChatRoomsModule } from './chat-rooms/chat-rooms.module';
 import { ScyllaModule } from './scylla/scylla.module';
 import { ReportsModule } from './reports/reports.module';
-import { ElasticModule } from './common/modules/elastic.module';
+import { ElasticModule } from './common/modules/elastic/elastic.module';
+import { RouletteModule } from './roulette/roulette.module';
+import { RedisModule } from './common/modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { ElasticModule } from './common/modules/elastic.module';
     ScyllaModule,
     ReportsModule,
     ElasticModule,
+    RouletteModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [
