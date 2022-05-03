@@ -9,17 +9,17 @@ import { RouletteUsersService } from './roulette-users.service';
 @Injectable()
 export class RouletteService {
   constructor(
-    private readonly rouletteSessionsService: RouletteSessionsService,
-    private readonly rouletteUsersService: RouletteUsersService,
-    private readonly rouletteMatchingService: RouletteMatchingsService,
+    private readonly sessionsService: RouletteSessionsService,
+    private readonly usersService: RouletteUsersService,
+    private readonly matchingService: RouletteMatchingsService,
   ) {}
 
   async startRouletteSession(
     userId: UserEntity['id'],
   ): Promise<RouletteSessionEntity> {
-    const session = await this.rouletteSessionsService.createOne({ userId });
+    const session = await this.sessionsService.createOne({ userId });
 
-    await this.rouletteUsersService.makeUserAvailable(userId);
+    await this.usersService.makeUserAvailable(userId);
 
     return session;
   }
@@ -28,9 +28,9 @@ export class RouletteService {
     sessionId: RouletteSessionEntity['id'],
     userId: UserEntity['id'],
   ): Promise<RouletteSessionEntity> {
-    const endedSession = await this.rouletteSessionsService.stopOne(sessionId);
+    const endedSession = await this.sessionsService.stopOne(sessionId);
 
-    await this.rouletteUsersService.makeUserUnavailable(userId);
+    await this.usersService.makeUserUnavailable(userId);
 
     return endedSession;
   }
@@ -39,10 +39,7 @@ export class RouletteService {
     userId: UserEntity['id'],
     sessionId: RouletteSessionEntity['id'],
   ): Promise<RouletteSessionMatchEntity> {
-    const match = await this.rouletteMatchingService.createMatch(
-      userId,
-      sessionId,
-    );
+    const match = await this.matchingService.createMatch(userId, sessionId);
 
     return match;
   }
@@ -51,7 +48,7 @@ export class RouletteService {
     userId: UserEntity['id'],
     matchId: RouletteSessionMatchEntity['id'],
   ): Promise<RouletteSessionMatchEntity> {
-    const match = await this.rouletteMatchingService.stopMatch(userId, matchId);
+    const match = await this.matchingService.stopMatch(userId, matchId);
 
     return match;
   }

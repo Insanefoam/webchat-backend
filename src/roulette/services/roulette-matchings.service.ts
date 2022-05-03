@@ -4,6 +4,7 @@ import { getRandomElement } from 'src/common/utils';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { RouletteSessionMatchEntity } from '../entities/roulette-session-match.entity';
 import { RouletteSessionEntity } from '../entities/roulette-session.entity';
+import { RouletteMatchingsGateway } from '../sockets/roulette-matchings.gateway';
 import { RouletteSessionsService } from './roulette-sessions.service';
 import { RouletteUsersService } from './roulette-users.service';
 
@@ -12,6 +13,7 @@ export class RouletteMatchingsService {
   constructor(
     private readonly rouletteUsersService: RouletteUsersService,
     private readonly rouletteSessionsService: RouletteSessionsService,
+    private readonly matchingsGateway: RouletteMatchingsGateway,
   ) {}
 
   async createMatch(
@@ -46,11 +48,14 @@ export class RouletteMatchingsService {
       companionId: companion.id,
       sessionId: sessionId,
     });
-    await this._startMatch({
+    await this.matchingsGateway.emitNewMatching(iamMatch);
+
+    const companionMatch = await this._startMatch({
       userId: companion.id,
       companionId: iamId,
       sessionId: companionActiveSession.id,
     });
+    await this.matchingsGateway.emitNewMatching(companionMatch);
 
     await this.rouletteUsersService.makeUserUnavailable(iamId);
     await this.rouletteUsersService.makeUserUnavailable(companion.id);
@@ -72,13 +77,18 @@ export class RouletteMatchingsService {
 
     const companionMatch = await this.getUserActiveMatch(iamMatch.companionId);
 
-    const endedMatch = await this._endMatch(iamMatch.id);
-    await this._endMatch(companionMatch.id);
+    const iamEndedMatch = await this._endMatch(iamMatch.id);
+    await this.matchingsGateway.emitMatchingStopped(iamEndedMatch);
 
-    await this.rouletteUsersService.makeUserAvailable(endedMatch.userId);
-    await this.rouletteUsersService.makeUserAvailable(endedMatch.companionId);
+    const companionEndedMatch = await this._endMatch(companionMatch.id);
+    await this.matchingsGateway.emitMatchingStopped(companionEndedMatch);
 
-    return endedMatch;
+    await this.rouletteUsersService.makeUserAvailable(iamEndedMatch.userId);
+    await this.rouletteUsersService.makeUserAvailable(
+      iamEndedMatch.companionId,
+    );
+
+    return iamEndedMatch;
   }
 
   async getUserActiveMatch(

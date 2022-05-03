@@ -4,6 +4,8 @@ import { UserEntity } from 'src/users/entities/user.entity';
 export class RouletteSessionEntity extends BaseUUIDEntity {
   static tableName = 'roulette_sessions';
 
+  user?: UserEntity;
+
   userId: UserEntity['id'];
 
   startedAt: string;

@@ -7,6 +7,8 @@ import { RouletteUsersService } from './services/roulette-users.service';
 import { RouletteMatchingsService } from './services/roulette-matchings.service';
 import { RouletteSessionMatchFieldResolver } from './resolvers/roulette-session-match.field.resolver';
 import { RedisModule } from 'src/common/modules/redis/redis.module';
+import { RouletteParticipantsGateway } from './sockets/roulette-participants.gateway';
+import { RouletteMatchingsGateway } from './sockets/roulette-matchings.gateway';
 
 @Module({
   imports: [RedisModule],
@@ -18,6 +20,8 @@ import { RedisModule } from 'src/common/modules/redis/redis.module';
     RouletteUsersService,
     RouletteMatchingsService,
     RouletteSessionMatchFieldResolver,
+    RouletteParticipantsGateway,
+    RouletteMatchingsGateway,
   ],
 })
 export class RouletteModule {}

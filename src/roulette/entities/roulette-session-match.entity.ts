@@ -5,7 +5,11 @@ import { RouletteSessionEntity } from './roulette-session.entity';
 export class RouletteSessionMatchEntity extends BaseUUIDEntity {
   static tableName = 'roulette_session_matches';
 
+  session?: RouletteSessionEntity;
+
   sessionId: RouletteSessionEntity['id'];
+
+  user: RouletteSessionEntity;
 
   userId: RouletteSessionEntity['userId'];
 
