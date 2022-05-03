@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from 'src/users/entities/user.entity';
-import { ChatParticipantEntity } from '../entites/chat-participant.entity';
-import { ChatRoomEntity } from '../entites/chat-room.entity';
+import { ChatParticipantEntity } from '../entities/chat-participant.entity';
+import { ChatRoomEntity } from '../entities/chat-room.entity';
 import { CreateChatRoomInput } from '../inputs/chat-rooms.inputs';
 
 @Injectable()

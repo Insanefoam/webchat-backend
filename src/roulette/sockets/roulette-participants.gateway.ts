@@ -13,8 +13,8 @@ import { websocketNamespace, websocketRooms } from '../constants';
 @WebSocketGateway(80, { namespace: websocketNamespace })
 export class RouletteParticipantsGateway {
   @UseGuards(WsJwtAuthGuard)
-  @SubscribeMessage('join-private-room')
-  async joinRoom(
+  @SubscribeMessage('join_private_room')
+  async handleJoinPrivateRoom(
     @ConnectedSocket() socket: Socket,
     @IAM() iam: UserEntity,
   ): Promise<void> {

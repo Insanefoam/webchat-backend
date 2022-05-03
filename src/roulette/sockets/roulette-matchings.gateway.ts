@@ -6,6 +6,7 @@ import {
   websocketRooms,
 } from '../constants';
 import { RouletteSessionMatchEntity } from '../entities/roulette-session-match.entity';
+import { RouletteSessionMatchModel } from '../models/roulette-session-match.model';
 
 @WebSocketGateway(80, { namespace: websocketNamespace })
 export class RouletteMatchingsGateway {
@@ -15,7 +16,9 @@ export class RouletteMatchingsGateway {
   async emitNewMatching(matching: RouletteSessionMatchEntity): Promise<void> {
     this.server
       .in(websocketRooms.roulettePrivateRoom(matching.userId))
-      .emit(websocketEvents.newMatch, { matching });
+      .emit(websocketEvents.newMatch, {
+        matching: RouletteSessionMatchModel.createFromEntity(matching),
+      });
   }
 
   async emitMatchingStopped(
@@ -23,6 +26,8 @@ export class RouletteMatchingsGateway {
   ): Promise<void> {
     this.server
       .in(websocketRooms.roulettePrivateRoom(matching.userId))
-      .emit(websocketEvents.matchStopped, { matching });
+      .emit(websocketEvents.matchStopped, {
+        matching: RouletteSessionMatchModel.createFromEntity(matching),
+      });
   }
 }

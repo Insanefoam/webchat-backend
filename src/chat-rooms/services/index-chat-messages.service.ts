@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { ChatMessageEntity } from '../entites/chat-message.entity';
+import { ChatMessageEntity } from '../entities/chat-message.entity';
 
 @Injectable()
 export class IndexChatMessagesService {

@@ -1,5 +1,5 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
-import { ChatParticipantEntity } from '../entites/chat-participant.entity';
+import { ChatParticipantEntity } from '../entities/chat-participant.entity';
 import { ChatParticipantModel } from '../models/chat-participant.model';
 import { ChatRoomModel } from '../models/chat-room.model';
 

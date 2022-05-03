@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { UserModel } from 'src/users/models/user.model';
-import { ChatMessageEntity } from '../entites/chat-message.entity';
+import { ChatMessageEntity } from '../entities/chat-message.entity';
 import { ChatRoomModel } from './chat-room.model';
 
 @ObjectType('ChatMessage')
