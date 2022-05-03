@@ -1,13 +1,28 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
+import { GqlContextType, GqlExecutionContext } from '@nestjs/graphql';
 import { FastifyRequest } from 'fastify';
+import { Socket } from 'socket.io';
+import { UserEntity } from 'src/users/entities/user.entity';
 
 export const IAM = createParamDecorator(
   (field: string, ctx: ExecutionContext) => {
-    const gqlContext = GqlExecutionContext.create(ctx);
+    let user: UserEntity;
 
-    const req = gqlContext.getContext().req as FastifyRequest;
+    if (ctx.getType() === 'ws') {
+      const wsContext = ctx.switchToWs();
 
-    return field ? req.user[field] : req.user;
+      const req = wsContext.getClient<Socket>().request;
+
+      user = req.user;
+    }
+
+    if (ctx.getType<GqlContextType>() === 'graphql') {
+      const gqlContext = GqlExecutionContext.create(ctx);
+      const req = gqlContext.getContext().req as FastifyRequest;
+
+      user = req.user;
+    }
+
+    return field ? user[field] : user;
   },
 );

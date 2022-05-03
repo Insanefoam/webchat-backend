@@ -851,7 +851,7 @@
     path-to-regexp "3.2.0"
     tslib "2.3.1"
 
-"@nestjs/platform-socket.io@^8.2.4":
+"@nestjs/platform-socket.io@^8.4.4":
   version "8.4.4"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-socket.io/-/platform-socket.io-8.4.4.tgz#6fe10205387271b80027dd48cf9a986c1c397635"
   integrity sha512-+/OE5W8J8K7oqNKBYAKa2e4c6OjKOsYN8XL0tBRk67yhB5/gtO93MV7IomAAVkOXPGi8u3sClxXxbSN3o5jywA==
@@ -878,7 +878,7 @@
     optional "0.1.4"
     tslib "2.3.1"
 
-"@nestjs/websockets@^8.2.4":
+"@nestjs/websockets@^8.4.4":
   version "8.4.4"
   resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-8.4.4.tgz#11d6384a3bde5f97ac8a401032cf5c011901b53b"
   integrity sha512-c7GPbdxDaAR9uTfZHibIIyhFli+YopUVC0nrKGisS8rSsId1wuEIvWo73RLcRekcO85LPGZGf2f+wsP/SxD3yw==
